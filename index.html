@@ -1,16 +1,9 @@
-
 <!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no" />
 <title>Gabès — Environmental Awareness</title>
-<header>
-  <nav aria-label="Language switch" style="justify-content: center; padding: 0.3rem;">
-    <button class="lang-btn flag-btn" onclick="window.location.href='gabes-fr.html'" aria-label="French">🇫🇷</button>
-    <button class="lang-btn flag-btn" onclick="window.location.href='gabes-ar.html'" aria-label="Arabic">🇹🇳</button>
-  </nav>
-</header>
 <style>
   :root{
     --green:#2f7a4f;
@@ -21,7 +14,6 @@
     --accent: #a66f2e;
     --hero-height: 100vh;
     --dark-bg: #1a1a1a;
-    --vh: 1vh; /* ADD THIS LINE */
   }
 
   /* Mobile viewport fixes */
@@ -51,8 +43,6 @@
     color: #e0e0e0;
   }
   
-
-
   .brand{display:flex;align-items:center;gap:.6rem}
   .logo{
     width:44px;height:44px;border-radius:8px;
@@ -69,10 +59,9 @@
 
   nav{display:flex;gap:.4rem;align-items:center}
   .lang-btn {
-    /* Keep all existing styles, but add: */
     cursor: pointer;
-    text-decoration: none; /* Remove underline */
-    display: inline-block; /* Better button behavior */
+    text-decoration: none;
+    display: inline-block;
   }
 
   .lang-btn:hover {
@@ -87,8 +76,8 @@
   body.pollution-theme .lang-btn:hover {
     background: rgba(255,255,255,0.1);
   }
-/* Minimal header with flags only */
-header{
+
+  header{
     position:fixed;
     top:0;left:0;right:0;z-index:60;
     display:flex;
@@ -97,46 +86,50 @@ header{
     backdrop-filter: blur(10px);
     background: rgba(255,255,255,0.3);
     border-bottom: 1px solid rgba(255,255,255,0.2);
-}
+  }
 
-body.pollution-theme header {
+  body.pollution-theme header {
     background: rgba(26,26,26,0.3);
     border-bottom: 1px solid rgba(255,255,255,0.1);
-}
-.arrow-btn{
+  }
+
+  .arrow-btn{
     width:56px;
     height:56px;
     border-radius:999px;
     border:0;
-    background: rgba(255,255,255,0.15) !important;
+    background: rgba(255,255,255,0.15);
     display:grid;
     place-items:center;
     cursor:pointer;
-    backdrop-filter: blur(20px) brightness(0.7) !important;
+    backdrop-filter: blur(20px) brightness(0.7);
     transition: all 0.4s ease;
-    border: 1px solid rgba(255,255,255,0.05) !important;
-}
+    border: 1px solid rgba(255,255,255,0.05);
+    position: relative;
+    z-index: 20;
+  }
 
-.arrow-btn:hover {
+  .arrow-btn:hover {
     transform: scale(1.05);
-    background: rgba(255,255,255,0.25) !important;
-    backdrop-filter: blur(25px) brightness(0.8) !important;
-}
+    background: rgba(255,255,255,0.25);
+    backdrop-filter: blur(25px) brightness(0.8);
+  }
 
-.arrow-icon{
+  .arrow-icon{
     width:24px;
     height:24px;
     transition: all 0.3s ease;
-    filter: blur(0.8px) !important;
-    opacity: 0.7 !important;
-    stroke: rgba(255,255,255,0.8) !important;
-}
+    filter: blur(0.8px);
+    opacity: 0.7;
+    stroke: rgba(255,255,255,0.8);
+  }
 
-.arrow-btn:hover .arrow-icon{
+  .arrow-btn:hover .arrow-icon{
     transform: translateY(3px);
-    opacity: 0.8 !important;
-}
-.flag-btn {
+    opacity: 0.8;
+  }
+
+  .flag-btn {
     font-size: 1.4rem;
     padding: 0.3rem 0.6rem;
     background: transparent;
@@ -144,19 +137,19 @@ body.pollution-theme header {
     border-radius: 8px;
     cursor: pointer;
     transition: all 0.3s ease;
-}
+  }
 
-.flag-btn:hover {
+  .flag-btn:hover {
     transform: scale(1.2);
     background: rgba(255,255,255,0.2);
     border-color: rgba(255,255,255,0.5);
-}
-  /* Hero - Fixed for mobile */
+  }
+
   /* Hero - FIXED FOR MOBILE */
   .hero{
     position:relative;
     height: 100vh;
-    height: calc(var(--vh, 1vh) * 100); /* USE THIS INSTEAD */
+    min-height: -webkit-fill-available;
     width:100%;
     display:flex;
     align-items:flex-end;
@@ -172,7 +165,7 @@ body.pollution-theme header {
     background-image: url('pollution.png');
     background-size: cover;
     background-position: center center;
-    background-attachment: fixed; /* Keep this for effect */
+    background-attachment: scroll;
     filter: contrast(.95) saturate(.9) grayscale(.04);
     z-index:0;
   }
@@ -192,7 +185,7 @@ body.pollution-theme header {
     z-index:10;
     width:100%;
     max-width:1100px;
-    padding:2.4rem 2.4rem 4rem; /* Extra bottom padding for mobile */
+    padding:2.4rem 2.4rem 5rem;
     color:white;
     display:flex;
     align-items:center;
@@ -215,37 +208,6 @@ body.pollution-theme header {
   }
 
   .controls{display:flex;gap:.6rem;align-items:center}
-
-  /* Arrow button - Fixed position */
-  .arrow-btn{
-    width:56px;
-    height:56px;
-    border-radius:999px;
-    border:0;
-    background:var(--glass);
-    display:grid;
-    place-items:center;
-    cursor:pointer;
-    backdrop-filter: blur(6px);
-    transition: all 0.4s ease;
-    position: relative;
-    z-index: 20;
-  }
-
-  .arrow-btn:hover {
-    transform: scale(1.1);
-    background: rgba(255,255,255,0.9);
-  }
-
-  .arrow-icon{
-    width:24px;
-    height:24px;
-    transition: all 0.3s ease;
-  }
-
-  .arrow-btn:hover .arrow-icon{
-    transform: translateY(4px);
-  }
 
   /* timer & metrics box */
   .stats{
@@ -358,7 +320,7 @@ body.pollution-theme header {
     color: #b0b0b0;
   }
 
-  /* Additional sections style - EASY TO ADD MORE */
+  /* Additional sections style */
   .additional-section {
     margin: 3rem 0;
     padding: 2rem;
@@ -449,7 +411,7 @@ body.pollution-theme header {
     .hero-inner{
       flex-direction:column;
       align-items:flex-start;
-      padding:1.4rem 1.4rem 3rem;
+      padding:1.4rem 1.4rem 4rem;
     }
     .hero-left{max-width:100%}
     .metrics{flex-wrap:wrap; justify-content: center;}
@@ -459,7 +421,7 @@ body.pollution-theme header {
   }
 
   @media (max-width: 600px) {
-    .hero-inner{padding:1rem 1rem 2.5rem;}
+    .hero-inner{padding:1rem 1rem 3rem;}
     .stats{
       padding:0.8rem;
       width: 100%;
@@ -487,16 +449,33 @@ body.pollution-theme header {
     .subtitle {
       font-size: 1rem;
     }
+    .hero-inner {
+      padding: 1rem 1rem 4rem;
+    }
+  }
+
+  /* Force mobile height */
+  @media (max-width: 768px) {
+    .hero {
+      height: 100vh;
+      height: -webkit-fill-available;
+    }
   }
 </style>
 </head>
 <body>
 
+<header>
+  <nav aria-label="Language switch" style="justify-content: center; padding: 0.3rem;">
+    <button class="lang-btn flag-btn" onclick="window.location.href='gabes-fr.html'" aria-label="French">🇫🇷</button>
+    <button class="lang-btn flag-btn" onclick="window.location.href='gabes-ar.html'" aria-label="Arabic">🇹🇳</button>
+  </nav>
+</header>
 
 <div class="hero" role="banner" aria-label="Gabès hero — oasis and sea, polluted in background">
   <div class="pollution" id="pollution-layer" aria-hidden="true"></div>
 
-  <div class="hero-inner" style="margin-bottom:4rem;">
+  <div class="hero-inner">
     <div class="hero-left">
       <div class="title">Gabès: 41 Years of Industrial Pollution</div>
       <div class="subtitle">Since 1984, the coastal oasis has faced continuous contamination from phosphate processing.</div>
@@ -576,8 +555,6 @@ body.pollution-theme header {
     </section>
   </div>
 
-  <!-- UPDATED COMPREHENSIVE SECTIONS -->
-  
   <div class="additional-section">
     <h2 class="section-title">Direct Evidence from Strikes & Shutdowns</h2>
     <div class="section-content">
@@ -642,28 +619,32 @@ body.pollution-theme header {
     </div>
   </div>
 
-  <!-- END OF UPDATED SECTIONS -->
-
   <footer>
     <small>© Gabès Awareness</small>
   </footer>
 </main>
 
 <script>
+// MOBILE FIX: Force proper viewport height
+function setHeroHeight() {
+  const hero = document.querySelector('.hero');
+  if (hero) {
+    hero.style.height = window.innerHeight + 'px';
+  }
+}
+
 // Realistic PER-SECOND metrics based on 41 years of operation since 1984
 const METRIC_RATES = {
-  phosphogypsum: 0.1215,     // tons per second (10,500 tons/day ÷ 86,400 seconds)
-  cadmium: 0.000092,         // tons per second (estimated 8 tons/day ÷ 86,400 seconds)
-  ammonia: 0.00035,          // tons per second (estimated 30 tons/day ÷ 86,400 seconds)
-  so2: 0.00057,              // tons per second (estimated 49 tons/day ÷ 86,400 seconds)
-  contamination: 0.000000066 // % increase per second (reaching ~85% after 41 years)
+  phosphogypsum: 0.1215,
+  cadmium: 0.000092,
+  ammonia: 0.00035,
+  so2: 0.00057,
+  contamination: 0.000000066
 };
 
-// Start date: January 1, 1984 when the complex began operations
 const START_DATE_ISO = '1984-01-01T00:00:00+01:00';
 const startDate = new Date(START_DATE_ISO);
 
-// Get current real-time metrics
 function getCurrentMetrics() {
   const now = new Date();
   const secondsSince1984 = Math.max(0, Math.floor((now - startDate) / 1000));
@@ -679,7 +660,6 @@ function getCurrentMetrics() {
 
 function updateMetricsDisplay() {
   const metrics = getCurrentMetrics();
-  
   document.getElementById('m1').textContent = metrics.phosphogypsum.toLocaleString();
   document.getElementById('m2').textContent = metrics.cadmium.toLocaleString();
   document.getElementById('m3').textContent = metrics.ammonia.toLocaleString();
@@ -701,16 +681,17 @@ function updateTimer() {
   el.textContent = `${years}y ${days}d ${String(hours).padStart(2,'0')}:${String(minutes).padStart(2,'0')}:${String(seconds).padStart(2,'0')}`;
 }
 
-// Initialize
 (function init() {
+  // Set hero height for mobile
+  setHeroHeight();
+  window.addEventListener('resize', setHeroHeight);
+  window.addEventListener('orientationchange', setHeroHeight);
+
   updateMetricsDisplay();
   updateTimer();
-
-  // Update every second
   setInterval(updateMetricsDisplay, 1000);
   setInterval(updateTimer, 1000);
 
-  // Simple arrow button - scroll to content
   const arrow = document.getElementById('arrow');
   arrow.addEventListener('click', () => {
     const mainElement = document.querySelector('main');
@@ -720,7 +701,6 @@ function updateTimer() {
     });
   });
 
-  // Pollution theme on scroll
   window.addEventListener('scroll', () => {
     const mainElement = document.querySelector('main');
     if (window.scrollY > mainElement.offsetTop - 300) {
@@ -730,7 +710,6 @@ function updateTimer() {
     }
   });
 
-  // Pollution animation
   const puffLayer = document.getElementById('pollution-layer');
   function makePuff() {
     const p = document.createElement('div');
@@ -746,29 +725,8 @@ function updateTimer() {
     puffLayer.appendChild(p);
     setTimeout(() => p.remove(), 7000);
   }
-  
   setInterval(makePuff, 800);
 })();
-    // MOBILE FIX: Force proper viewport height
-  function fixMobileViewport() {
-    // Set the hero height properly for mobile
-    const hero = document.querySelector('.hero');
-    if (hero) {
-      hero.style.height = window.innerHeight + 'px';
-    }
-    
-    // Prevent address bar hiding issues
-    document.documentElement.style.setProperty('--vh', window.innerHeight * 0.01 + 'px');
-  }
-
-  // Run on load and resize
-  window.addEventListener('load', fixMobileViewport);
-  window.addEventListener('resize', fixMobileViewport);
-  window.addEventListener('orientationchange', fixMobileViewport);
-  
-  // Also add this CSS variable to your :root
-  // Add this to your CSS :root section
 </script>
-
 </body>
 </html>
