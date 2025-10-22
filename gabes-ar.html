@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no" />
 <title>قابس — التوعية البيئية</title>
 <header>
   <nav aria-label="تبديل اللغة" style="justify-content: center; padding: 0.3rem;">
@@ -20,6 +20,17 @@
     --accent: #a66f2e;
     --hero-height: 100vh;
     --dark-bg: #1a1a1a;
+  }
+
+  /* Mobile viewport fixes */
+  html {
+    height: 100%;
+    overflow-x: hidden;
+  }
+  
+  body {
+    min-height: 100%;
+    overflow-x: hidden;
   }
 
   /* Basic reset */
@@ -102,6 +113,8 @@ body.pollution-theme header {
     backdrop-filter: blur(20px) brightness(0.7) !important;
     transition: all 0.4s ease;
     border: 1px solid rgba(255,255,255,0.05) !important;
+    position: relative;
+    z-index: 20;
 }
 
 .arrow-btn:hover {
@@ -141,10 +154,13 @@ body.pollution-theme header {
     border-color: rgba(255,255,255,0.5);
 }
 
-  /* Hero */
+  /* Hero - Fixed for mobile */
   .hero{
     position:relative;
-    height:var(--hero-height);
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
+    height: 100vh;
+    height: -webkit-fill-available;
     width:100%;
     display:flex;
     align-items:flex-end;
@@ -160,6 +176,7 @@ body.pollution-theme header {
     background-image: url('pollution.png');
     background-size: cover;
     background-position: center center;
+    background-attachment: scroll; /* Fix for mobile */
     filter: contrast(.95) saturate(.9) grayscale(.04);
     z-index:0;
   }
@@ -179,7 +196,7 @@ body.pollution-theme header {
     z-index:10;
     width:100%;
     max-width:1100px;
-    padding:2.4rem;
+    padding:2.4rem 2.4rem 4rem; /* Extra bottom padding for mobile */
     color:white;
     display:flex;
     align-items:center;
@@ -407,7 +424,7 @@ body.pollution-theme header {
     .hero-inner{
       flex-direction:column;
       align-items:flex-start;
-      padding:1.4rem;
+      padding:1.4rem 1.4rem 3rem;
     }
     .hero-left{max-width:100%}
     .metrics{flex-wrap:wrap; justify-content: center;}
@@ -417,10 +434,34 @@ body.pollution-theme header {
   }
 
   @media (max-width: 600px) {
-    .hero-inner{padding:1rem;}
-    .stats{padding:0.8rem;}
-    .metric{min-width: 100px; padding: 0.6rem 0.8rem;}
+    .hero-inner{padding:1rem 1rem 2.5rem;}
+    .stats{
+      padding:0.8rem;
+      width: 100%;
+      margin-top: 1rem;
+    }
+    .metrics{
+      justify-content: space-between;
+      width: 100%;
+    }
+    .metric{
+      min-width: calc(50% - 0.5rem);
+      padding: 0.6rem 0.8rem;
+      margin-bottom: 0.5rem;
+    }
     .metric .value{font-size: 1rem;}
+  }
+
+  @media (max-width: 400px) {
+    .metric {
+      min-width: 100%;
+    }
+    .title {
+      font-size: 1.6rem;
+    }
+    .subtitle {
+      font-size: 1rem;
+    }
   }
 </style>
 </head>
