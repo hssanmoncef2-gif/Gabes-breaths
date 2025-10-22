@@ -756,20 +756,18 @@ function updateTimer() {
   setInterval(updateMetricsDisplay, 1000);
   setInterval(updateTimer, 1000);
 
-  const arrow = document.getElementById('arrow');
-  arrow.addEventListener('click', () => {
-    // Get the main element
-    const mainElement = document.querySelector('main');
-    
-    // Calculate the scroll position - account for mobile layout
-    const scrollPosition = mainElement.getBoundingClientRect().top + window.pageYOffset - 50;
-    
-    // Smooth scroll to main content
+const arrow = document.getElementById('arrow');
+arrow.addEventListener('click', () => {
+  // Method 2: Scroll to the first content card
+  const firstCard = document.querySelector('.content-card');
+  if (firstCard) {
+    const cardPosition = firstCard.getBoundingClientRect().top + window.pageYOffset - 80;
     window.scrollTo({
-      top: scrollPosition,
+      top: cardPosition,
       behavior: 'smooth'
     });
-  });
+  }
+});
 
   window.addEventListener('scroll', () => {
     const mainElement = document.querySelector('main');
