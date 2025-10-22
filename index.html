@@ -756,11 +756,12 @@ function updateTimer() {
   setInterval(updateMetricsDisplay, 1000);
   setInterval(updateTimer, 1000);
 
-   const arrow = document.getElementById('arrow');
+  const arrow = document.getElementById('arrow');
   arrow.addEventListener('click', () => {
-    // Simple scroll to main content
+    // Scroll to just below the hero section
+    const heroHeight = document.querySelector('.hero').offsetHeight;
     window.scrollTo({
-      top: document.querySelector('main').offsetTop - 20,
+      top: heroHeight - 50,
       behavior: 'smooth'
     });
   });
