@@ -758,10 +758,15 @@ function updateTimer() {
 
   const arrow = document.getElementById('arrow');
   arrow.addEventListener('click', () => {
-    // Scroll to just below the hero section
-    const heroHeight = document.querySelector('.hero').offsetHeight;
+    // Get the main element
+    const mainElement = document.querySelector('main');
+    
+    // Calculate the scroll position - account for mobile layout
+    const scrollPosition = mainElement.getBoundingClientRect().top + window.pageYOffset - 50;
+    
+    // Smooth scroll to main content
     window.scrollTo({
-      top: heroHeight - 50,
+      top: scrollPosition,
       behavior: 'smooth'
     });
   });
