@@ -145,8 +145,8 @@
     border-color: rgba(255,255,255,0.5);
   }
 
-  /* Hero - FIXED FOR MOBILE */
-  .hero{
+  /*  - FIXED FOR MOBILE */
+  .{
     position:relative;
     height: 100vh;
     min-height: -webkit-fill-available;
@@ -158,27 +158,30 @@
   }
 
   /* Background image */
-  .hero::before{
-    content:"";
-    position:absolute;
-    inset:0;
-    background-image: url('pollution.png');
-    background-size: cover;
-    background-position: center center;
-    background-attachment: scroll;
-    filter: contrast(.95) saturate(.9) grayscale(.04);
-    z-index:0;
-  }
+/* Hero - MOBILE FIX */
+.hero{
+  position:relative;
+  height: 100vh;
+  min-height: 100vh;
+  width:100%;
+  display:flex;
+  align-items:flex-end;
+  justify-content:center;
+  overflow:hidden;
+}
 
-  /* overlay shading for readability */
-  .hero::after{
-    content:"";
-    position:absolute;
-    inset:0;
-    background:linear-gradient(to bottom, rgba(8,8,8,0.22) 0%, rgba(0,0,0,0.5) 70%);
-    z-index:1;
-    pointer-events:none;
-  }
+/* Background image */
+.hero::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background-image: url('pollution.png');
+  background-size: cover;
+  background-position: center center;
+  background-attachment: scroll !important;
+  filter: contrast(.95) saturate(.9) grayscale(.04);
+  z-index:0;
+}
 
   /* content that sits above the image */
   .hero-inner{
@@ -625,6 +628,24 @@
 </main>
 
 <script>
+  // MOBILE FIX - FORCE HEIGHT
+document.addEventListener('DOMContentLoaded', function() {
+  function fixMobileHeight() {
+    const hero = document.querySelector('.hero');
+    if (hero) {
+      hero.style.height = window.innerHeight + 'px';
+      console.log('Mobile fix applied - Height:', window.innerHeight + 'px');
+    }
+  }
+  
+  fixMobileHeight();
+  window.addEventListener('resize', fixMobileHeight);
+  window.addEventListener('orientationchange', fixMobileHeight);
+  
+  // Re-apply after a short delay
+  setTimeout(fixMobileHeight, 100);
+  setTimeout(fixMobileHeight, 500);
+});
 // MOBILE FIX: Force proper viewport height
 function setHeroHeight() {
   const hero = document.querySelector('.hero');
