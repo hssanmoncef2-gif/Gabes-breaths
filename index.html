@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -20,6 +21,7 @@
     --accent: #a66f2e;
     --hero-height: 100vh;
     --dark-bg: #1a1a1a;
+    --vh: 1vh; /* ADD THIS LINE */
   }
 
   /* Mobile viewport fixes */
@@ -150,12 +152,11 @@ body.pollution-theme header {
     border-color: rgba(255,255,255,0.5);
 }
   /* Hero - Fixed for mobile */
+  /* Hero - FIXED FOR MOBILE */
   .hero{
     position:relative;
-    min-height: 100vh;
-    min-height: -webkit-fill-available;
     height: 100vh;
-    height: -webkit-fill-available;
+    height: calc(var(--vh, 1vh) * 100); /* USE THIS INSTEAD */
     width:100%;
     display:flex;
     align-items:flex-end;
@@ -171,7 +172,7 @@ body.pollution-theme header {
     background-image: url('pollution.png');
     background-size: cover;
     background-position: center center;
-    background-attachment: scroll; /* Fix for mobile */
+    background-attachment: fixed; /* Keep this for effect */
     filter: contrast(.95) saturate(.9) grayscale(.04);
     z-index:0;
   }
@@ -748,6 +749,25 @@ function updateTimer() {
   
   setInterval(makePuff, 800);
 })();
+    // MOBILE FIX: Force proper viewport height
+  function fixMobileViewport() {
+    // Set the hero height properly for mobile
+    const hero = document.querySelector('.hero');
+    if (hero) {
+      hero.style.height = window.innerHeight + 'px';
+    }
+    
+    // Prevent address bar hiding issues
+    document.documentElement.style.setProperty('--vh', window.innerHeight * 0.01 + 'px');
+  }
+
+  // Run on load and resize
+  window.addEventListener('load', fixMobileViewport);
+  window.addEventListener('resize', fixMobileViewport);
+  window.addEventListener('orientationchange', fixMobileViewport);
+  
+  // Also add this CSS variable to your :root
+  // Add this to your CSS :root section
 </script>
 
 </body>
