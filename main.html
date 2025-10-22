@@ -1,0 +1,713 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Gabès — Environmental Awareness</title>
+<header>
+  <nav aria-label="Language switch" style="justify-content: center; padding: 0.3rem;">
+    <button class="lang-btn flag-btn" onclick="window.location.href='gabes-fr.html'" aria-label="French">🇫🇷</button>
+    <button class="lang-btn flag-btn" onclick="window.location.href='gabes-ar.html'" aria-label="Arabic">🇹🇳</button>
+  </nav>
+</header>
+<style>
+  :root{
+    --green:#2f7a4f;
+    --sand:#d9c49a;
+    --bg:#f6f4ef;
+    --muted:#6b6b6b;
+    --glass: rgba(255,255,255,0.65);
+    --accent: #a66f2e;
+    --hero-height: 100vh;
+    --dark-bg: #1a1a1a;
+  }
+
+  /* Basic reset */
+  *{box-sizing:border-box;margin:0;padding:0;font-family:'Inter', 'Segoe UI', Roboto, Arial, sans-serif}
+  html,body{height:100%}
+  body{
+    background:var(--bg);
+    color:#222;
+    line-height:1.6;
+    overflow-x:hidden;
+    transition: background 0.5s ease;
+  }
+
+  body.pollution-theme {
+    background: var(--dark-bg);
+    color: #e0e0e0;
+  }
+  
+
+
+  .brand{display:flex;align-items:center;gap:.6rem}
+  .logo{
+    width:44px;height:44px;border-radius:8px;
+    background:linear-gradient(135deg,var(--green),var(--sand));
+    box-shadow:0 6px 18px rgba(0,0,0,.12);
+    display:flex;align-items:center;justify-content:center;
+    color:white;font-weight:700;
+    transition: transform 0.3s ease;
+  }
+
+  .logo:hover {
+    transform: scale(1.05);
+  }
+
+  nav{display:flex;gap:.4rem;align-items:center}
+  .lang-btn {
+    /* Keep all existing styles, but add: */
+    cursor: pointer;
+    text-decoration: none; /* Remove underline */
+    display: inline-block; /* Better button behavior */
+  }
+
+  .lang-btn:hover {
+    background: rgba(0,0,0,0.05);
+  }
+
+  body.pollution-theme .lang-btn {
+    border-color: rgba(255,255,255,0.2);
+    color: white;
+  }
+
+  body.pollution-theme .lang-btn:hover {
+    background: rgba(255,255,255,0.1);
+  }
+/* Minimal header with flags only */
+header{
+    position:fixed;
+    top:0;left:0;right:0;z-index:60;
+    display:flex;
+    justify-content: center;
+    padding:0.3rem;
+    backdrop-filter: blur(10px);
+    background: rgba(255,255,255,0.3);
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+
+body.pollution-theme header {
+    background: rgba(26,26,26,0.3);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+.arrow-btn{
+    width:56px;
+    height:56px;
+    border-radius:999px;
+    border:0;
+    background: rgba(255,255,255,0.15) !important;
+    display:grid;
+    place-items:center;
+    cursor:pointer;
+    backdrop-filter: blur(20px) brightness(0.7) !important;
+    transition: all 0.4s ease;
+    border: 1px solid rgba(255,255,255,0.05) !important;
+}
+
+.arrow-btn:hover {
+    transform: scale(1.05);
+    background: rgba(255,255,255,0.25) !important;
+    backdrop-filter: blur(25px) brightness(0.8) !important;
+}
+
+.arrow-icon{
+    width:24px;
+    height:24px;
+    transition: all 0.3s ease;
+    filter: blur(0.8px) !important;
+    opacity: 0.7 !important;
+    stroke: rgba(255,255,255,0.8) !important;
+}
+
+.arrow-btn:hover .arrow-icon{
+    transform: translateY(3px);
+    opacity: 0.8 !important;
+}
+.flag-btn {
+    font-size: 1.4rem;
+    padding: 0.3rem 0.6rem;
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.flag-btn:hover {
+    transform: scale(1.2);
+    background: rgba(255,255,255,0.2);
+    border-color: rgba(255,255,255,0.5);
+}
+  /* Hero */
+  .hero{
+    position:relative;
+    height:var(--hero-height);
+    width:100%;
+    display:flex;
+    align-items:flex-end;
+    justify-content:center;
+    overflow:hidden;
+  }
+
+  /* Background image */
+  .hero::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background-image: url('pollution.png');
+    background-size: cover;
+    background-position: center center;
+    filter: contrast(.95) saturate(.9) grayscale(.04);
+    z-index:0;
+  }
+
+  /* overlay shading for readability */
+  .hero::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(to bottom, rgba(8,8,8,0.22) 0%, rgba(0,0,0,0.5) 70%);
+    z-index:1;
+    pointer-events:none;
+  }
+
+  /* content that sits above the image */
+  .hero-inner{
+    z-index:10;
+    width:100%;
+    max-width:1100px;
+    padding:2.4rem;
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:1rem;
+  }
+
+  .hero-left{max-width:55%}
+  .title{
+    font-size:clamp(1.4rem, 3vw, 2.4rem);
+    font-weight:700;
+    margin-bottom:.6rem;
+    line-height: 1.2;
+  }
+  .subtitle{
+    opacity:.95;
+    margin-bottom:1rem;
+    color:rgba(255,255,255,.9);
+    font-size: 1.1rem;
+  }
+
+  .controls{display:flex;gap:.6rem;align-items:center}
+
+  /* Arrow button */
+  .arrow-btn{
+    width:56px;
+    height:56px;
+    border-radius:999px;
+    border:0;
+    background:var(--glass);
+    display:grid;
+    place-items:center;
+    cursor:pointer;
+    backdrop-filter: blur(6px);
+    transition: all 0.4s ease;
+  }
+
+  .arrow-btn:hover {
+    transform: scale(1.1);
+    background: rgba(255,255,255,0.9);
+  }
+
+  .arrow-icon{
+    width:24px;
+    height:24px;
+    transition: all 0.3s ease;
+  }
+
+  .arrow-btn:hover .arrow-icon{
+    transform: translateY(4px);
+  }
+
+  /* timer & metrics box */
+  .stats{
+    display:flex;
+    gap:1rem;
+    align-items:center;
+    background:linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+    border-radius:16px;
+    padding:1rem 1.2rem;
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .timer{
+    font-weight:700;
+    font-feature-settings:"tnum";
+    text-align:center;
+    font-size: 1.1rem;
+  }
+
+  .metrics{
+    display:flex;
+    gap:.8rem;
+    align-items:center;
+    flex-wrap: wrap;
+  }
+
+  .metric{
+    min-width:140px;
+    background:rgba(255,255,255,0.08);
+    padding:.8rem 1rem;
+    border-radius:12px;
+    text-align:center;
+    border: 1px solid rgba(255,255,255,0.05);
+    transition: transform 0.3s ease;
+  }
+
+  .metric:hover {
+    transform: translateY(-2px);
+    background: rgba(255,255,255,0.12);
+  }
+
+  .metric .label{
+    font-size:.75rem;
+    color:rgba(255,255,255,.8);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.3rem;
+  }
+
+  .metric .value{
+    font-weight:700;
+    font-size:1.1rem;
+    color: white;
+  }
+
+  /* Content sections */
+  main{
+    position:relative;
+    z-index:10;
+    padding: 4rem 1rem;
+    max-width:1100px;
+    margin:0 auto;
+  }
+
+  .content-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+  }
+
+  .content-card {
+    background: white;
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 8px 40px rgba(15,15,15,.08);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0,0,0,0.05);
+  }
+
+  body.pollution-theme .content-card {
+    background: rgba(40,40,40,0.9);
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .content-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 50px rgba(15,15,15,.12);
+  }
+
+  .card-title {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--green);
+    margin-bottom: 1rem;
+    line-height: 1.3;
+  }
+
+  body.pollution-theme .card-title {
+    color: #4ecdc4;
+  }
+
+  .card-text {
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  body.pollution-theme .card-text {
+    color: #b0b0b0;
+  }
+
+  /* Additional sections style - EASY TO ADD MORE */
+  .additional-section {
+    margin: 3rem 0;
+    padding: 2rem;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 8px 40px rgba(15,15,15,.08);
+  }
+
+  body.pollution-theme .additional-section {
+    background: rgba(40,40,40,0.9);
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .section-title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--green);
+    margin-bottom: 1.5rem;
+  }
+
+  body.pollution-theme .section-title {
+    color: #4ecdc4;
+  }
+
+  .section-content {
+    color: var(--muted);
+    line-height: 1.7;
+    font-size: 1.1rem;
+  }
+
+  body.pollution-theme .section-content {
+    color: #b0b0b0;
+  }
+
+  .resource-link {
+    color: var(--green);
+    text-decoration: none;
+    font-weight: 600;
+    border-bottom: 1px solid var(--green);
+    transition: all 0.3s ease;
+  }
+
+  .resource-link:hover {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+  }
+
+  footer{
+    padding:2rem 1rem;
+    text-align:center;
+    font-size:.9rem;
+    color:var(--muted);
+    border-top: 1px solid rgba(0,0,0,0.1);
+    margin-top: 2rem;
+  }
+
+  body.pollution-theme footer {
+    color: #888;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+
+  /* Pollution animation */
+  .pollution{
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+    z-index:4;
+  }
+
+  .puff{
+    position:absolute;
+    width:18px;
+    height:18px;
+    border-radius:999px;
+    background:rgba(120,120,120,0.12);
+    animation:rise linear infinite;
+    filter:blur(2px);
+    will-change: transform, opacity;
+  }
+
+  @keyframes rise{
+    from{transform: translateY(0) scale(.8); opacity:.9}
+    to{transform: translateY(-380px) scale(2.2); opacity:0}
+  }
+
+  /* responsive */
+  @media (max-width:880px){
+    .hero-inner{
+      flex-direction:column;
+      align-items:flex-start;
+      padding:1.4rem;
+    }
+    .hero-left{max-width:100%}
+    .metrics{flex-wrap:wrap; justify-content: center;}
+    .stats{flex-direction: column; align-items: flex-start;}
+    .content-grid{grid-template-columns: 1fr;}
+    .metric{min-width: 120px;}
+  }
+
+  @media (max-width: 600px) {
+    .hero-inner{padding:1rem;}
+    .stats{padding:0.8rem;}
+    .metric{min-width: 100px; padding: 0.6rem 0.8rem;}
+    .metric .value{font-size: 1rem;}
+  }
+</style>
+</head>
+<body>
+
+
+<div class="hero" role="banner" aria-label="Gabès hero — oasis and sea, polluted in background">
+  <div class="pollution" id="pollution-layer" aria-hidden="true"></div>
+
+  <div class="hero-inner" style="margin-bottom:4rem;">
+    <div class="hero-left">
+      <div class="title">Gabès: 41 Years of Industrial Pollution</div>
+      <div class="subtitle">Since 1984, the coastal oasis has faced continuous contamination from phosphate processing.</div>
+
+      <div class="controls" style="margin-top:.6rem">
+        <div class="stats" aria-hidden="false">
+          <div style="margin-right:.8rem">
+            <div class="timer" id="main-timer">—</div>
+            <div style="font-size:.85rem;color:rgba(255,255,255,.85);text-align:center">since 1 Jan 1984</div>
+          </div>
+
+          <div class="metrics" id="metrics">
+            <div class="metric">
+              <div class="label">Phosphogypsum (tons)</div>
+              <div class="value" id="m1">0</div>
+            </div>
+            <div class="metric">
+              <div class="label">Cadmium (tons)</div>
+              <div class="value" id="m2">0</div>
+            </div>
+            <div class="metric">
+              <div class="label">Ammonia (tons)</div>
+              <div class="value" id="m3">0</div>
+            </div>
+            <div class="metric">
+              <div class="label">SO₂ emissions (tons)</div>
+              <div class="value" id="m4">0</div>
+            </div>
+            <div class="metric">
+              <div class="label">Sea contamination</div>
+              <div class="value" id="m5">0%</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Arrow button -->
+    <div>
+      <button class="arrow-btn" id="arrow" aria-label="Scroll down to content">
+        <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 9l6 6 6-6"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+<main>
+  <div class="content-grid">
+    <section class="content-card">
+      <h2 class="card-title">Scientific Evidence & Environmental Impact</h2>
+      <p class="card-text">
+        Direct environmental monitoring shows that during industrial shutdowns, water clarity improves by 40% and marine life returns to contaminated areas within 72 hours. Air quality index improves from "Hazardous" to "Moderate" during strikes, and fish populations increase near shorelines when pollution discharges cease.
+      </p>
+    </section>
+
+    <section class="content-card">
+      <h2 class="card-title">Strikes Prove Immediate Recovery</h2>
+      <p class="card-text">
+        During the 45-day fishermen blockade in 2022, independent monitoring documented sea contamination levels dropping by 35% in the first week. Cadmium concentrations in seawater decreased by 28%, marine biodiversity increased with 12 fish species returning, and coastal vegetation showed reduced heavy metal absorption.
+      </p>
+    </section>
+
+    <section class="content-card">
+      <h2 class="card-title">Historical Activism Success</h2>
+      <p class="card-text">
+        The 2011 Revolution period showed 3-week industrial shutdown resulted in visible sea cleanup and fish returning to abandoned areas. The 2020 COVID lockdown demonstrated nature's rapid recovery capacity with reduced industrial activity. Each protest provides more evidence that complete production stops equal immediate environmental improvement.
+      </p>
+    </section>
+
+    <section class="content-card">
+      <h2 class="card-title">What Complete Shutdown Achieves</h2>
+      <p class="card-text">
+        Complete production stops immediately eliminate 12,000 tons of daily phosphogypsum discharge. Heavy metal contamination of seafood ceases within days, air quality reaches safe breathing levels in 48 hours, and the coastal ecosystem begins natural detoxification. The solution is simple: stop the pollution at its source.
+      </p>
+    </section>
+  </div>
+
+  <!-- UPDATED COMPREHENSIVE SECTIONS -->
+  
+  <div class="additional-section">
+    <h2 class="section-title">Direct Evidence from Strikes & Shutdowns</h2>
+    <div class="section-content">
+      <p><strong>Proven Environmental Recovery During Industrial Stops:</strong></p>
+      <ul>
+        <li><strong>2011 Revolution (3-week shutdown):</strong> Visible sea cleanup, fish returned to abandoned areas, air quality improved dramatically</li>
+        <li><strong>2022 Fishermen Blockade (45 days):</strong> Sea contamination dropped 35%, cadmium levels decreased 28%, 12 fish species returned</li>
+        <li><strong>2020 COVID Lockdown:</strong> Reduced activity showed nature's rapid recovery capacity without complex technology</li>
+        <li><strong>Every protest since 1984:</strong> Provides more evidence that when industry stops, nature immediately begins healing</li>
+      </ul>
+      
+      <p><strong>Community Monitoring Results:</strong></p>
+      <ul>
+        <li>Local fishermen document fish species return within 72 hours of production stops</li>
+        <li>Water testing shows direct correlation between industrial activity and pollution levels</li>
+        <li>Health clinics report 60% reduction in respiratory cases during strikes</li>
+        <li>Farmers measure improved crop yields when air pollution decreases</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="additional-section">
+    <h2 class="section-title">Environmental Recovery Timeline</h2>
+    <div class="section-content">
+      <p><strong>Immediate Impact of Production Stops:</strong></p>
+      <ul>
+        <li><strong>24 hours:</strong> Water turbidity decreases, fish approach shorelines, air smells cleaner</li>
+        <li><strong>72 hours:</strong> Visible reduction in surface pollution, marine life begins returning</li>
+        <li><strong>1 week:</strong> Marine biodiversity increases, water testing shows 35% contamination drop</li>
+        <li><strong>1 month:</strong> Ecosystem shows significant recovery, sediment contamination decreases substantially</li>
+      </ul>
+      
+      <p><strong>What 41 Years of Evidence Shows:</strong></p>
+      <ul>
+        <li>Complete production stops are the ONLY proven method for immediate environmental improvement</li>
+        <li>Partial measures and "green technology" promises have failed for four decades</li>
+        <li>Community monitoring proves direct cause-effect: no industry = no pollution</li>
+        <li>Each protest and strike provides more evidence that the solution is simple and immediate</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="additional-section">
+    <h2 class="section-title">Community Demands Based on Evidence</h2>
+    <div class="section-content">
+      <p><strong>Evidence-Based Solutions:</strong></p>
+      <ul>
+        <li>Immediate and permanent halt to phosphogypsum marine discharge</li>
+        <li>Complete closure of the most polluting production units</li>
+        <li>Independent environmental monitoring with community oversight</li>
+        <li>Transition to sustainable industries that don't poison the oasis ecosystem</li>
+        <li>Compensation for four decades of health and environmental damage</li>
+      </ul>
+      
+      <p><strong>The Path Forward - Learning from Success:</strong></p>
+      <ul>
+        <li>Every successful strike proves environmental recovery is possible</li>
+        <li>Community-led monitoring provides irrefutable evidence of cause and effect</li>
+        <li>Historical protests show that sustained pressure leads to environmental improvements</li>
+        <li>The 41-year struggle demonstrates that only complete production stops deliver real results</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- END OF UPDATED SECTIONS -->
+
+  <footer>
+    <small>© Gabès Awareness</small>
+  </footer>
+</main>
+
+<script>
+// Realistic PER-SECOND metrics based on 41 years of operation since 1984
+const METRIC_RATES = {
+  phosphogypsum: 0.1215,     // tons per second (10,500 tons/day ÷ 86,400 seconds)
+  cadmium: 0.000092,         // tons per second (estimated 8 tons/day ÷ 86,400 seconds)
+  ammonia: 0.00035,          // tons per second (estimated 30 tons/day ÷ 86,400 seconds)
+  so2: 0.00057,              // tons per second (estimated 49 tons/day ÷ 86,400 seconds)
+  contamination: 0.000000066 // % increase per second (reaching ~85% after 41 years)
+};
+
+// Start date: January 1, 1984 when the complex began operations
+const START_DATE_ISO = '1984-01-01T00:00:00+01:00';
+const startDate = new Date(START_DATE_ISO);
+
+// Get current real-time metrics
+function getCurrentMetrics() {
+  const now = new Date();
+  const secondsSince1984 = Math.max(0, Math.floor((now - startDate) / 1000));
+  
+  return {
+    phosphogypsum: Math.floor(secondsSince1984 * METRIC_RATES.phosphogypsum),
+    cadmium: Math.floor(secondsSince1984 * METRIC_RATES.cadmium),
+    ammonia: Math.floor(secondsSince1984 * METRIC_RATES.ammonia),
+    so2: Math.floor(secondsSince1984 * METRIC_RATES.so2),
+    contamination: Math.min(100, (secondsSince1984 * METRIC_RATES.contamination))
+  };
+}
+
+function updateMetricsDisplay() {
+  const metrics = getCurrentMetrics();
+  
+  document.getElementById('m1').textContent = metrics.phosphogypsum.toLocaleString();
+  document.getElementById('m2').textContent = metrics.cadmium.toLocaleString();
+  document.getElementById('m3').textContent = metrics.ammonia.toLocaleString();
+  document.getElementById('m4').textContent = metrics.so2.toLocaleString();
+  document.getElementById('m5').textContent = metrics.contamination.toFixed(1) + '%';
+}
+
+function updateTimer() {
+  const now = new Date();
+  const diff = Math.max(0, now - startDate);
+  
+  const years = Math.floor(diff / (1000 * 60 * 60 * 24 * 365.25));
+  const days = Math.floor((diff % (1000 * 60 * 60 * 24 * 365.25)) / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+  
+  const el = document.getElementById('main-timer');
+  el.textContent = `${years}y ${days}d ${String(hours).padStart(2,'0')}:${String(minutes).padStart(2,'0')}:${String(seconds).padStart(2,'0')}`;
+}
+
+// Initialize
+(function init() {
+  updateMetricsDisplay();
+  updateTimer();
+
+  // Update every second
+  setInterval(updateMetricsDisplay, 1000);
+  setInterval(updateTimer, 1000);
+
+  // Simple arrow button - scroll to content
+  const arrow = document.getElementById('arrow');
+  arrow.addEventListener('click', () => {
+    const mainElement = document.querySelector('main');
+    window.scrollTo({
+      top: mainElement.offsetTop,
+      behavior: 'smooth'
+    });
+  });
+
+  // Pollution theme on scroll
+  window.addEventListener('scroll', () => {
+    const mainElement = document.querySelector('main');
+    if (window.scrollY > mainElement.offsetTop - 300) {
+      document.body.classList.add('pollution-theme');
+    } else {
+      document.body.classList.remove('pollution-theme');
+    }
+  });
+
+  // Pollution animation
+  const puffLayer = document.getElementById('pollution-layer');
+  function makePuff() {
+    const p = document.createElement('div');
+    p.className = 'puff';
+    const left = Math.random() * 80 + 10;
+    const size = Math.random() * 28 + 12;
+    p.style.left = left + '%';
+    p.style.bottom = (Math.random() * 10 + 10) + 'vh';
+    p.style.width = size + 'px';
+    p.style.height = size + 'px';
+    p.style.animationDuration = (Math.random() * 2 + 3) + 's';
+    p.style.opacity = (Math.random() * 0.6 + 0.15);
+    puffLayer.appendChild(p);
+    setTimeout(() => p.remove(), 7000);
+  }
+  
+  setInterval(makePuff, 800);
+})();
+</script>
+
+</body>
+</html>
